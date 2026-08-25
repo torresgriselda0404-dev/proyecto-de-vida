@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mi Proyecto de Vida</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--green:#2e7d61;--light:#eaf6f0;--dark:#18372d;--white:#fff;--text:#24352f;--accent:#78bfa0}
+body{font-family:Arial,sans-serif;background:#f5faf7;color:var(--text);min-height:100vh}
+.app{display:flex;min-height:100vh}
+.sidebar{width:250px;background:linear-gradient(180deg,#173c31,#2e7d61);color:white;padding:25px 16px;position:fixed;height:100vh;left:0;top:0}
+.logo{text-align:center;margin-bottom:28px}.logo .icon{font-size:42px}.logo h2{font-size:21px;margin-top:5px}
+.nav button{width:100%;border:0;background:transparent;color:white;text-align:left;padding:13px 15px;border-radius:10px;margin:3px 0;cursor:pointer;font-size:15px}
+.nav button:hover,.nav button.active{background:rgba(255,255,255,.17)}
+.main{margin-left:250px;width:calc(100% - 250px);padding:30px;max-width:1300px}
+header{background:var(--white);border-radius:20px;padding:28px;box-shadow:0 5px 20px #174c3920;margin-bottom:22px}
+header h1{color:var(--dark);font-size:31px;margin-bottom:7px} header p{color:#60756d}
+.section{display:none}.section.active{display:block}
+.card{background:white;border-radius:18px;padding:22px;margin-bottom:20px;box-shadow:0 5px 18px #174c3915}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+h2{color:var(--dark);margin-bottom:16px} h3{margin-bottom:10px;color:var(--green)}
+label{display:block;font-weight:bold;margin:12px 0 7px}
+input,textarea,select{width:100%;border:1px solid #cdded7;border-radius:10px;padding:11px;font:inherit;background:#fbfefd}
+textarea{min-height:100px;resize:vertical}
+.btn{border:0;border-radius:10px;padding:11px 17px;background:var(--green);color:white;font-weight:bold;cursor:pointer;margin-top:12px}
+.btn:hover{filter:brightness(.93)}
+.hero{text-align:center;padding:35px;background:linear-gradient(135deg,#e9f7f0,#d7eee4);border-radius:18px}
+.hero .big{font-size:55px}.hero h2{font-size:30px}.quote{font-style:italic;color:#426b5b;margin-top:12px}
+.goal{border-left:5px solid var(--accent);padding:15px;background:#f7fbf9;border-radius:10px;margin:10px 0}
+.goal-row{display:flex;gap:10px;align-items:center}.goal-row input[type=text]{flex:1}
+.progress-wrap{background:#dcebe4;border-radius:20px;height:14px;overflow:hidden;margin:12px 0}
+.progress{height:100%;background:var(--green);width:0%;transition:.3s}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.stat{padding:20px;background:var(--light);border-radius:14px;text-align:center}.stat strong{display:block;font-size:28px;color:var(--green)}
+footer{text-align:center;padding:20px;color:#71857d}
+@media(max-width:760px){.sidebar{width:72px;padding:15px 8px}.logo h2,.nav span{display:none}.logo .icon{font-size:30px}.main{margin-left:72px;width:calc(100% - 72px);padding:16px}.nav button{text-align:center}.stats{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+  <div class="logo"><div class="icon">🌱</div><h2>Mi Proyecto</h2></div>
+  <nav class="nav">
+    <button class="active" onclick="showSection('inicio',this)">🏠 <span>Inicio</span></button>
+    <button onclick="showSection('quien',this)">👤 <span>Quién soy</span></button>
+    <button onclick="showSection('mision',this)">💭 <span>Misión y visión</span></button>
+    <button onclick="showSection('metas',this)">🎯 <span>Mis metas</span></button>
+    <button onclick="showSection('estudios',this)">🎓 <span>Estudios</span></button>
+    <button onclick="showSection('profesional',this)">💼 <span>Profesional</span></button>
+    <button onclick="showSection('personal',this)">❤️ <span>Personal</span></button>
+    <button onclick="showSection('suenos',this)">✨ <span>Mis sueños</span></button>
+    <button onclick="showSection('progreso',this)">📊 <span>Progreso</span></button>
+  </nav>
+</aside>
+
+<main class="main">
+<header><h1>🌿 Mi Proyecto de Vida</h1><p>Construyendo hoy la persona que quiero ser mañana.</p></header>
+
+<section id="inicio" class="section active">
+<div class="hero"><div class="big">🌱</div><h2>Mi vida, mis sueños, mi camino</h2><p>Este espacio me ayuda a conocerme, establecer metas y organizar mis sueños.</p><p class="quote">“Cada pequeño paso cuenta para construir un gran futuro.”</p></div>
+<div class="card"><h2>Mi frase personal</h2><textarea id="frase" placeholder="Escribe aquí una frase que te inspire..."></textarea><button class="btn" onclick="save()">💾 Guardar</button></div>
+</section>
+
+<section id="quien" class="section">
+<div class="card"><h2>👤 Quién soy</h2><div class="grid">
+<div><label>Mi nombre</label><input id="nombre" placeholder="Escribe tu nombre"></div>
+<div><label>Mi edad</label><input id="edad" type="number" placeholder="Edad"></div>
+<div><label>Mis cualidades</label><textarea id="cualidades" placeholder="Responsable, creativa..."></textarea></div>
+<div><label>Mis intereses</label><textarea id="intereses" placeholder="Música, lectura, tecnología..."></textarea></div>
+<div><label>Mis valores</label><textarea id="valores" placeholder="Respeto, amor, honestidad..."></textarea></div>
+<div><label>Lo que quiero mejorar</label><textarea id="mejorar" placeholder="Escribe aspectos que quieres desarrollar"></textarea></div>
+</div><button class="btn" onclick="save()">💾 Guardar información</button></div>
+</section>
+
+<section id="mision" class="section">
+<div class="grid">
+<div class="card"><h2>💭 Mi misión</h2><textarea id="misionText" placeholder="¿Qué quiero aportar al mundo? ¿Qué persona quiero ser?"></textarea></div>
+<div class="card"><h2>🔭 Mi visión</h2><textarea id="visionText" placeholder="¿Cómo imagino mi vida en el futuro?"></textarea></div>
+</div><button class="btn" onclick="save()">💾 Guardar</button>
+</section>
+
+<section id="metas" class="section">
+<div class="card"><h2>🎯 Mis metas</h2><p>Agrega metas y marca las que ya hayas conseguido.</p>
+<div class="goal-row"><input id="goalInput" placeholder="Escribe una nueva meta..."><select id="goalType"><option>Corto plazo</option><option>Mediano plazo</option><option>Largo plazo</option></select><button class="btn" onclick="addGoal()">Agregar</button></div>
+<div id="goals"></div></div>
+</section>
+
+<section id="estudios" class="section">
+<div class="card"><h2>🎓 Mi proyecto académico</h2><div class="grid">
+<div><label>Estudios que quiero realizar</label><textarea id="estudiosText"></textarea></div>
+<div><label>Carrera que me interesa</label><input id="carrera"></div>
+<div><label>¿Por qué me interesa?</label><textarea id="porque"></textarea></div>
+<div><label>¿Qué debo hacer para lograrlo?</label><textarea id="acciones"></textarea></div>
+</div><button class="btn" onclick="save()">💾 Guardar</button></div>
+</section>
+
+<section id="profesional" class="section">
+<div class="card"><h2>💼 Mi futuro profesional</h2><div class="grid">
+<div><label>Profesión o trabajo soñado</label><input id="profesion"></div>
+<div><label>Mi lugar de trabajo ideal</label><input id="trabajo"></div>
+<div><label>Habilidades que quiero desarrollar</label><textarea id="habilidades"></textarea></div>
+<div><label>Mi objetivo profesional</label><textarea id="objetivo"></textarea></div>
+</div><button class="btn" onclick="save()">💾 Guardar</button></div>
+</section>
+
+<section id="personal" class="section">
+<div class="card"><h2>❤️ Mi vida personal y familiar</h2>
+<label>¿Cómo quiero cuidar mis relaciones?</label><textarea id="relaciones"></textarea>
+<label>¿Qué experiencias quiero vivir?</label><textarea id="experiencias"></textarea>
+<label>¿Qué hábitos positivos quiero desarrollar?</label><textarea id="habitos"></textarea>
+<button class="btn" onclick="save()">💾 Guardar</button></div>
+</section>
+
+<section id="suenos" class="section">
+<div class="card"><h2>✨ Mis grandes sueños</h2><textarea id="suenosText" style="min-height:220px" placeholder="Viajes, proyectos, logros, experiencias..."></textarea><button class="btn" onclick="save()">💾 Guardar</button></div>
+</section>
+
+<section id="progreso" class="section">
+<div class="card"><h2>📊 Mi progreso</h2><div class="stats"><div class="stat"><strong id="total">0</strong>Metas</div><div class="stat"><strong id="done">0</strong>Completadas</div><div class="stat"><strong id="percent">0%</strong>Progreso</div></div><div class="progress-wrap"><div class="progress" id="bar"></div></div><p id="message">Empieza agregando tus primeras metas.</p></div>
+</section>
+
+<footer>🌿 Mi Proyecto de Vida • Creado para organizar sueños, metas y futuro.</footer>
+</main>
+</div>
+
+<script>
+const fields=['frase','nombre','edad','cualidades','intereses','valores','mejorar','misionText','visionText','estudiosText','carrera','porque','acciones','profesion','trabajo','habilidades','objetivo','relaciones','experiencias','habitos','suenosText'];
+function showSection(id,btn){
+ document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+ document.getElementById(id).classList.add('active');
+ document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active')); btn.classList.add('active');
+ if(id==='progreso') updateStats();
+}
+function save(){
+ fields.forEach(id=>{let e=document.getElementById(id);if(e)localStorage.setItem('pv_'+id,e.value)});
+ alert('✅ Información guardada correctamente.');
+}
+function load(){
+ fields.forEach(id=>{let e=document.getElementById(id);let v=localStorage.getItem('pv_'+id);if(e&&v!==null)e.value=v});
+ let goals=JSON.parse(localStorage.getItem('pv_goals')||'[]'); goals.forEach(g=>renderGoal(g)); updateStats();
+}
+function addGoal(){
+ let input=document.getElementById('goalInput'),type=document.getElementById('goalType');
+ if(!input.value.trim())return;
+ let g={text:input.value.trim(),type:type.value,done:false,id:Date.now()};
+ let goals=JSON.parse(localStorage.getItem('pv_goals')||'[]');goals.push(g);localStorage.setItem('pv_goals',JSON.stringify(goals));renderGoal(g);input.value='';updateStats();
+}
+function renderGoal(g){
+ let wrap=document.getElementById('goals'), div=document.createElement('div');div.className='goal';div.dataset.id=g.id;
+ div.innerHTML=`<div class="goal-row"><input type="checkbox" ${g.done?'checked':''} onchange="toggleGoal(${g.id},this.checked)"><strong>${escapeHtml(g.text)}</strong><small>${escapeHtml(g.type)}</small><button class="btn" onclick="deleteGoal(${g.id})">Eliminar</button></div>`;
+ wrap.appendChild(div);
+}
+function escapeHtml(s){return s.replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function toggleGoal(id,done){let a=JSON.parse(localStorage.getItem('pv_goals')||'[]');let g=a.find(x=>x.id===id);if(g)g.done=done;localStorage.setItem('pv_goals',JSON.stringify(a));updateStats()}
+function deleteGoal(id){let a=JSON.parse(localStorage.getItem('pv_goals')||'[]').filter(x=>x.id!==id);localStorage.setItem('pv_goals',JSON.stringify(a));document.querySelector(`[data-id="${id}"]`)?.remove();updateStats()}
+function updateStats(){let a=JSON.parse(localStorage.getItem('pv_goals')||'[]'),d=a.filter(x=>x.done).length,p=a.length?Math.round(d/a.length*100):0;document.getElementById('total').textContent=a.length;document.getElementById('done').textContent=d;document.getElementById('percent').textContent=p+'%';document.getElementById('bar').style.width=p+'%';document.getElementById('message').textContent=p===100&&a.length?'🎉 ¡Todas tus metas están completadas!':p?'💪 ¡Sigue avanzando, vas muy bien!':'🌱 Empieza agregando tus primeras metas.'}
+load();
+</script>
+</body>
+</html>
